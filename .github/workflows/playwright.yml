@@ -5,6 +5,10 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
+      - name: Set environment variables
+        run: |
+          echo "export URL=${{ env.URL }}" >> $GITHUB_ENV
+          echo "export SIZE=${{ env.SIZE }}" >> $GITHUB_ENV
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -15,9 +19,6 @@ jobs:
         run: npx playwright install chromium
       - name: Run Playwright tests
         run: npx playwright test
-        env:
-          URL: ${{ env.URL }}
-          SIZE: ${{ env.SIZE }}
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
         if: failure()
