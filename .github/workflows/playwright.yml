@@ -14,14 +14,10 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install chromium
       - name: Run Playwright tests
-        run: |
-          echo ${{ env.URL }}
-          echo ${{ vars.URL }}
-          echo env.URL
-          npx playwright test
+        run: npx playwright test
         env:
-          URL: ${{ env.URL }}
-          SIZE: ${{ env.SIZE }}
+          URL: ${{ vars.URL }}
+          SIZE: ${{ vars.SIZE }}
       - name: send telegram message on push
         uses: appleboy/telegram-action@master
         if: failure()
