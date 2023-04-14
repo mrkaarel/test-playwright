@@ -14,7 +14,11 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install chromium
       - name: Run Playwright tests
-        run: npx playwright test
+        run: |
+          echo ${{ env.URL }}
+          echo ${{ vars.URL }}
+          echo env.URL
+          npx playwright test
         env:
           URL: ${{ env.URL }}
           SIZE: ${{ env.SIZE }}
